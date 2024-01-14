@@ -19,11 +19,11 @@ public class AdminDao {
         
         try {
             st=con.createStatement();
-            rs=st.executeQuery("SELECT max(id) from ADMINS");
+            rs=st.executeQuery("SELECT max(UserID) from ADMINS");
         while(rs.next()){
             row=rs.getInt(1);
         }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         
@@ -33,29 +33,36 @@ public class AdminDao {
     public boolean isAdminNameExist(String username){
        
         try {
-            ps=con.prepareStatement("SELECT * FROM ADMINS UserName=?");
+            ps=con.prepareStatement("SELECT * FROM ADMINS WHERE UserName = ?");
             ps.setString(1, username);
             rs=ps.executeQuery();
         if(rs.next()){
             return true;
         }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
     
     public boolean insert(Admin admin){
-        String sql="insert into admin(UserID,UserName,UserPassword,UserMail) values(?,?,?,?)";
+        String sql="insert into ADMINS(UserName,UserPassword,UserMail) values(?,?,?)";
         try {
+            System.out.println("Executing SQL:"+sql);
             ps=con.prepareStatement(sql);
-            ps.setInt(1,admin.getID());
-            ps.setString(2,admin.getUserName());
-            ps.setString(3,admin.getPassWord());
-            ps.setString(4,admin.getEmail());
+            ps.setString(1,admin.getUserName());
+            ps.setString(2,admin.getPassWord());
+            ps.setString(3,admin.getEmail());
             
-            return ps.executeUpdate()>0;
-        } catch (SQLException ex) {
+            if(ps.executeUpdate()>0){
+                System.out.println("Insert successfull");
+                return true;
+            }else{
+                System.out.println("Insert failed");
+                return false;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
            return false;
         }
         

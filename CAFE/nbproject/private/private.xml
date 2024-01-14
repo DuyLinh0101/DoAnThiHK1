@@ -4,11 +4,18 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/cafe/ManagementProductFrame.java</file>
+            <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/cafe/LoginFrame.java</file>
+            <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/cafe/StatisticFrame.java</file>
+            <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/cafe/OrderFrame.java</file>
+            <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/model/Admin.java</file>
+            <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/model/MyConnection.java</file>
+            <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/cafe/ProductFrame.java</file>
+            <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/cafe/SignUpFrame.java</file>
+            <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/model/AdminDao.java</file>
             <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/cafe/JFrame.java</file>
             <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/cafe/CartFrame.java</file>
             <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/cafe/Product.java</file>
-            <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/cafe/OrderFrame.java</file>
-            <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/cafe/ProductFrame.java</file>
+            <file>file:/D:/DATA_DUYLINH/DoAnThiCuoiKy1/CAFE/src/cafe/ForgotPasswordFrame.java</file>
         </group>
     </open-files>
 </project-private>
