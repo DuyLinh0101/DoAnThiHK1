@@ -1,5 +1,6 @@
 
 package model;
+import cafe.ForgotPasswordFrame;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -67,4 +68,52 @@ public class AdminDao {
         }
         
     }
+    public boolean login(String username, String password){
+        try {
+            ps=con.prepareStatement("SELECT * FROM ADMINS WHERE UserName =? and UserPassword =?");
+            ps.setString(1, username);
+            ps.setString(2, password);
+            rs=ps.executeQuery();
+            if(rs.next()){
+                return true;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    return false;
+}
+     public boolean getEmail(String username, String mail){
+        try {
+            ps=con.prepareStatement("SELECT * FROM ADMINS WHERE UserName =? ");
+            ps.setString(1, username);
+            rs=ps.executeQuery();
+            if(rs.next()){
+              String oldmail =rs.getString(4);
+              if(mail.equals(oldmail)){
+                  return true;
+              }       
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(AdminDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    return false;
+}
+  
+     public boolean setPassword(String username, String password){
+         String sql ="UPDATE ADMINS set UserPassword=? WHERE UserName=?";
+        try {
+            ps=con.prepareStatement(sql);
+            ps.setString(1, password);
+            ps.setString(2, username);
+            return ps.executeUpdate()>0;
+        } catch (Exception ex) {
+            return false;
+        }
+     }
+
+    
+
+   
 }

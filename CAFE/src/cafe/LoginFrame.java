@@ -7,13 +7,14 @@ package cafe;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Admin;
 
 /**
  *
  * @author Administrator
  */
 public class LoginFrame extends javax.swing.JFrame {
-
+    Admin dao=new Admin();
     int xx,xy;
     public LoginFrame() {
         initComponents();
@@ -36,12 +37,12 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        Mat = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jPasswordField2 = new javax.swing.JPasswordField();
         MatMo = new javax.swing.JLabel();
+        Mat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -68,11 +69,11 @@ public class LoginFrame extends javax.swing.JFrame {
                 jLabel11MouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(423, 0, 39, 37));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 0, 39, 37));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Semibold", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("New Password :");
+        jLabel5.setText("Password :");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 223, 132, 31));
 
         jButton1.setBackground(new java.awt.Color(237, 236, 219));
@@ -108,15 +109,6 @@ public class LoginFrame extends javax.swing.JFrame {
         });
         jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 152, 329, 36));
 
-        Mat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hide.png"))); // NOI18N
-        Mat.setText("jLabel7");
-        Mat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                MatMouseClicked(evt);
-            }
-        });
-        jPanel1.add(Mat, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 29, -1));
-
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Sign Up");
@@ -135,7 +127,12 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Forgot Passwork");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 410, 158, 28));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 158, 28));
 
         jPasswordField2.setBackground(new java.awt.Color(204, 204, 204));
         jPasswordField2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
@@ -148,7 +145,11 @@ public class LoginFrame extends javax.swing.JFrame {
                 MatMoMouseClicked(evt);
             }
         });
-        jPanel1.add(MatMo, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 26, 27));
+        jPanel1.add(MatMo, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 26, 27));
+
+        Mat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/hide.png"))); // NOI18N
+        Mat.setText("jLabel7");
+        jPanel1.add(Mat, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 270, 30, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,14 +173,24 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel11MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+       if(isEmpty()){
+           String username=jTextField3.getText().trim();
+           String password=String.valueOf(jPasswordField2.getPassword());
+           if(dao.getMaxRowAdminTable() !=1){
+               if(dao.login(username,password)){
+                  JOptionPane.showConfirmDialog(this, "Login Success"); 
+                  new JFrame().setVisible(true);
+                   setVisible(false);
+               }else{
+                   JOptionPane.showConfirmDialog(this, "Incorrect username or password","Login Failed",2); 
+               }
+           }else{
+               JOptionPane.showConfirmDialog(this, "No admin in the admin table\nYou need to sign up first","Login",2);
+               new SignUpFrame().setVisible(true);
+               setVisible(false);
+           }
+       }
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void MatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MatMouseClicked
-        jPasswordField2.setEchoChar((char) 0);
-        Mat.setVisible(false);
-        MatMo.setVisible(true);
-    }//GEN-LAST:event_MatMouseClicked
 
     private void MatMoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MatMoMouseClicked
          jPasswordField2.setEchoChar('*');
@@ -211,6 +222,11 @@ public class LoginFrame extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_jLabel2MouseClicked
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        new ForgotPasswordFrame().setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jLabel6MouseClicked
+
     private void formWindowOpened(java.awt.event.WindowEvent evt){
            for(double i=0.1;i<=1.0;i+=0.1){
                String s=""+i;
@@ -223,6 +239,22 @@ public class LoginFrame extends javax.swing.JFrame {
                }
            }
        }
+    
+    
+    public boolean isEmpty(){
+           if(jTextField3.getText().isEmpty()){
+               JOptionPane.showConfirmDialog(this, "UserName is required","Warning",2);
+               return false;
+           }
+           if(String.valueOf(jPasswordField2.getPassword()).isEmpty()){
+               JOptionPane.showConfirmDialog(this, "Password is required","Warning",2);
+               return false;
+           }
+           
+           return true;
+       }
+    
+    
     public static void main(String args[]) {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -248,4 +280,6 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField jPasswordField2;
     private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+
+   
 }

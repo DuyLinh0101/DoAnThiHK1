@@ -39,5 +39,15 @@ public class Admin {
     public void setEmail(String Email) {
         this.Email = Email;
     }
+
+    public int getMaxRowAdminTable() {
+        AdminDao adminDao=new AdminDao();
+        return adminDao.getMaxRowAdminTable();
+    }
+
+    public boolean login(String username, String password) {
+        AdminDao adminDao=new AdminDao();
+        return adminDao.login(username, password);
+    }
     
 }
